@@ -8,9 +8,7 @@
     <style>
         :root {
             --bg-deep: #02020f;
-            --card-bg: #0b1329;
             --accent-cyan: #00f2fe;
-            --accent-blue: #4facfe;
             --text-main: #ffffff;
             --text-muted: #94a3b8;
         }
@@ -30,9 +28,10 @@
             color: var(--text-main);
             font-family: 'Inter', sans-serif;
             overflow-x: hidden;
+            padding-top: 140px; /* مسافة لكي لا يختفي المحتوى تحت الـ Navbar الثابت */
         }
 
-        /* Navbar */
+        /* Navbar الثابت */
         nav {
             position: fixed;
             top: 0;
@@ -42,15 +41,10 @@
             justify-content: space-between;
             align-items: center;
             padding: 20px 50px;
-            background: rgba(2, 2, 15, 0.85);
-            backdrop-filter: blur(10px);
+            background: rgba(2, 2, 15, 0.9);
+            backdrop-filter: blur(12px);
             z-index: 1000;
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .logo-area {
-            display: flex;
-            align-items: center;
         }
 
         .logo-area img {
@@ -80,99 +74,106 @@
             color: var(--text-muted);
         }
 
-        /* Main Container & Sections Structure */
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        /* كل قسم يشغل مساحة شاشة مستقلة تماماً لضمان عدم ظهور نصين معاً */
-        .page-section {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
+        /* الاسم والمسمى الوظيفي الثابت في الأعلى */
+        .fixed-header-identity {
             text-align: center;
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+            padding: 20px 20px 40px 20px;
+            margin-bottom: 40px;
         }
 
-        .page-section.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Hero Header */
-        .hero h1 {
-            font-size: 3rem;
+        .fixed-header-identity h1 {
+            font-size: 2.8rem;
             font-weight: 700;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
             letter-spacing: -0.5px;
         }
 
-        .hero p {
-            font-size: 1.25rem;
+        .fixed-header-identity p {
+            font-size: 1.15rem;
             color: var(--text-muted);
         }
 
-        /* Philosophy Text Blocks */
-        .philosophy-block h2 {
-            font-size: 2.4rem;
-            font-weight: 600;
-            margin-bottom: 20px;
-            line-height: 1.3;
+        /* حاوية النصوص التفاعلية */
+        .container {
+            max-width: 850px;
+            margin: 0 auto;
+            padding: 0 20px 150px 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 180px; /* مسافات مدروسة ومتوازنة وليست ضخمة */
         }
 
-        .philosophy-block p {
-            font-size: 1.2rem;
+        /* تأثير الظهور الفردي في المنتصف مع Effects */
+        .scroll-item {
+            text-align: center;
+            opacity: 0;
+            transform: translateY(40px) scale(0.95);
+            filter: blur(8px);
+            transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), 
+                        transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), 
+                        filter 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .scroll-item.active {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            filter: blur(0);
+        }
+
+        /* تصميم النصوص الفلسفية */
+        .scroll-item h2 {
+            font-size: 2.2rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            line-height: 1.35;
+        }
+
+        .scroll-item p {
+            font-size: 1.15rem;
             color: var(--text-muted);
             line-height: 1.6;
         }
 
-        /* Core Essence Card */
+        /* الكارد الاحترافي */
         .core-card {
             background: linear-gradient(135deg, #0b1329 0%, #060a17 100%);
             border: 1px solid rgba(0, 242, 254, 0.2);
             border-radius: 20px;
-            padding: 50px;
+            padding: 45px;
             text-align: left;
-            width: 100%;
             box-shadow: 0 20px 40px rgba(0,0,0,0.5);
         }
 
         .core-card h3 {
-            font-size: 1.8rem;
-            margin-bottom: 20px;
+            font-size: 1.7rem;
+            margin-bottom: 18px;
             color: var(--accent-cyan);
         }
 
         .core-card p {
             color: var(--text-muted);
-            font-size: 1.1rem;
+            font-size: 1.05rem;
             line-height: 1.7;
         }
 
-        /* Action Buttons */
+        /* أزرار التفاعل مع Hover Effects */
         .cta-container {
             display: flex;
             flex-direction: column;
-            gap: 20px;
+            gap: 18px;
             align-items: center;
             width: 100%;
         }
 
         .cta-btn {
             width: 100%;
-            max-width: 500px;
-            padding: 18px 30px;
+            max-width: 480px;
+            padding: 16px 28px;
             background: linear-gradient(135deg, #0052D4 0%, #4364F7 50%, #6FB1FC 100%);
             color: white;
             border: none;
             border-radius: 50px;
-            font-size: 1.1rem;
+            font-size: 1.05rem;
             font-weight: 600;
             cursor: pointer;
             display: flex;
@@ -180,7 +181,7 @@
             align-items: center;
             text-decoration: none;
             box-shadow: 0 10px 25px rgba(0, 82, 212, 0.3);
-            transition: all 0.3s ease;
+            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .cta-btn span {
@@ -188,7 +189,7 @@
         }
 
         .cta-btn:hover {
-            transform: translateY(-3px);
+            transform: translateY(-4px) scale(1.02);
             box-shadow: 0 15px 30px rgba(0, 242, 254, 0.4);
             background: linear-gradient(135deg, #4364F7 0%, #6FB1FC 100%);
         }
@@ -213,65 +214,65 @@
         </ul>
     </nav>
 
-    <!-- Main Content Container -->
+    <!-- اسمك والمسمى الوظيفي ثابت في الأعلى دائماً -->
+    <header class="fixed-header-identity" id="about">
+        <h1>Tariq Zeyad Jawad</h1>
+        <p>&gt; Data Analyst &nbsp;&nbsp; &gt; Data Engineer</p>
+    </header>
+
+    <!-- حاوية العناصر الفردية للتمرير التفاعلي في منتصف الشاشة -->
     <div class="container">
 
-        <!-- Hero Section -->
-        <section id="about" class="page-section hero">
-            <div>
-                <h1>Tariq Zeyad Jawad</h1>
-                <p>&gt; Data Analyst &nbsp;&nbsp; &gt; Data Engineer</p>
-            </div>
-        </section>
+        <!-- النص الأول -->
+        <div class="scroll-item">
+            <h2>Do you have a problem you are facing?</h2>
+        </div>
 
-        <!-- Section 1 -->
-        <section class="page-section philosophy-block">
-            <div>
-                <h2>Do you have a problem you are facing?</h2>
-                <p>Do you know how to solve it?</p>
-            </div>
-        </section>
+        <!-- النص الثاني -->
+        <div class="scroll-item">
+            <h2>Do you know how to solve it?</h2>
+        </div>
 
-        <!-- Section 2 -->
-        <section class="page-section philosophy-block">
-            <div>
-                <h2>PLAN in a coherent way to see the whole picture.</h2>
-                <p style="font-size: 1.6rem; color: #fff; margin-top: 15px;">THEN WHAT?</p>
-                <p style="margin-top: 12px; font-style: italic;">act...</p>
-                <p style="margin-top: 20px; color: var(--accent-cyan); font-weight: 500;">That's it, Vili — EVERYTHING starts with planning.</p>
-            </div>
-        </section>
+        <!-- النص الثالث -->
+        <div class="scroll-item">
+            <h2>PLAN in a coherent way to see the whole picture.</h2>
+        </div>
 
-        <!-- Core Essence Card -->
-        <section class="page-section">
+        <!-- النص الرابع -->
+        <div class="scroll-item">
+            <h2 style="font-size: 2.5rem; color: #fff;">THEN WHAT?</h2>
+            <p style="font-style: italic; margin-top: 10px; font-size: 1.3rem;">act...</p>
+            <p style="margin-top: 15px; color: var(--accent-cyan); font-weight: 500;">That's it, Vili — EVERYTHING starts with planning.</p>
+        </div>
+
+        <!-- كارد الجوهر -->
+        <div class="scroll-item">
             <div class="core-card">
                 <h3>The Core Essence</h3>
                 <p>My journey stems from a deep foundation in advanced computational sciences and physics. I view data and automated pipelines not just as numbers, but as structured physical systems that can be modeled, optimized, and converted into clear commercial direction.</p>
             </div>
-        </section>
+        </div>
 
-        <!-- Action / CTA Section -->
-        <section id="projects" class="page-section">
-            <div style="width: 100%;">
-                <h2 style="margin-bottom: 35px; font-size: 2rem;">Do you want to know more?</h2>
-                <div class="cta-container">
-                    <a href="#projects" class="cta-btn">
-                        Explore my projects <span>→</span>
-                    </a>
-                    <a href="#skills" class="cta-btn">
-                        View skills & Certificates <span>→</span>
-                    </a>
-                    <a href="#contact" class="cta-btn">
-                        About me & Contact <span>→</span>
-                    </a>
-                </div>
+        <!-- أزرار التفاعل -->
+        <div class="scroll-item" id="projects">
+            <h2 style="margin-bottom: 30px; font-size: 1.9rem;">Do you want to know more?</h2>
+            <div class="cta-container">
+                <a href="#projects" class="cta-btn">
+                    Explore my projects <span>→</span>
+                </a>
+                <a href="#skills" class="cta-btn">
+                    View skills & Certificates <span>→</span>
+                </a>
+                <a href="#contact" class="cta-btn">
+                    About me & Contact <span>→</span>
+                </a>
             </div>
-        </section>
+        </div>
 
     </div>
 
     <script>
-        // Live Clock Script
+        // الساعة الحية
         function updateTime() {
             const now = new Date();
             let hours = now.getHours();
@@ -286,11 +287,11 @@
         setInterval(updateTime, 1000);
         updateTime();
 
-        // Strict Scroll Reveal: يضمن ظهور قسم واحد فقط واختفاء البقية عند التمرير
+        // نظام ظهور واختفاء كل عنصر بمفرده بدقة عند وصوله لمنتصف الشاشة فقط
         const observerOptions = {
             root: null,
-            rootMargin: '-20% 0px -20% 0px',
-            threshold: 0.5
+            rootMargin: '-35% 0px -35% 0px', // يضبط منطقة التفعيل في المنتصف تماماً
+            threshold: 0.1
         };
 
         const observer = new IntersectionObserver((entries) => {
@@ -303,9 +304,10 @@
             });
         }, observerOptions);
 
-        document.querySelectorAll('.page-section').forEach(section => {
-            observer.observe(section);
+        document.querySelectorAll('.scroll-item').forEach(item => {
+            observer.observe(item);
         });
     </script>
 </body>
 </html>
+ 
