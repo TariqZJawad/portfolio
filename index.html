@@ -1,660 +1,295 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tariq Zeyad Jawad — Physics → Data &amp; AI</title>
-<meta name="description" content="Tariq Zeyad Jawad — quantum physics researcher building applied skills in data analysis, databases, automation, and machine learning.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --bg: #0a0c12;
-    --bg-elevated: #12151f;
-    --bg-card: #10131c;
-    --line: rgba(255,255,255,0.09);
-    --line-strong: rgba(255,255,255,0.16);
-    --text: #ece9e2;
-    --text-muted: #8991a6;
-    --text-faint: #5b6274;
-    --amber: #f2a93b;
-    --amber-dim: rgba(242,169,59,0.16);
-    --cyan: #49c7c2;
-    --cyan-dim: rgba(73,199,194,0.14);
-    --rose: #e0637a;
-    --display: 'Space Grotesk', 'Segoe UI', sans-serif;
-    --body: 'Inter', 'Segoe UI', sans-serif;
-    --mono: 'JetBrains Mono', 'Courier New', monospace;
-    --max: 1120px;
-  }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tariq Zeyad Jawad | Data Analyst & Data Engineer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-deep: #00001a;
+            --card-bg: #0b192c;
+            --accent-cyan: #00f2fe;
+            --accent-blue: #4facfe;
+            --text-main: #ffffff;
+            --text-muted: #94a3b8;
+        }
 
-  *{box-sizing:border-box; margin:0; padding:0;}
-  html{scroll-behavior:smooth;}
-  body{
-    background:var(--bg);
-    color:var(--text);
-    font-family:var(--body);
-    font-size:16px;
-    line-height:1.6;
-    -webkit-font-smoothing:antialiased;
-    overflow-x:hidden;
-  }
-  ::selection{background:var(--amber-dim); color:var(--amber);}
-  a{color:inherit; text-decoration:none;}
-  img{max-width:100%; display:block;}
-  section{position:relative;}
-  .wrap{max-width:var(--max); margin:0 auto; padding:0 28px;}
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-  a:focus-visible, button:focus-visible{
-    outline:2px solid var(--amber);
-    outline-offset:3px;
-    border-radius:2px;
-  }
+        body {
+            background-color: var(--bg-deep);
+            color: var(--text-main);
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
 
-  /* background texture: faint starfield / vacuum fluctuation dots */
-  .noise-field{
-    position:fixed; inset:0; z-index:0; pointer-events:none;
-    background-image:
-      radial-gradient(1px 1px at 12% 22%, rgba(255,255,255,.35), transparent),
-      radial-gradient(1px 1px at 78% 12%, rgba(255,255,255,.25), transparent),
-      radial-gradient(1px 1px at 45% 65%, rgba(255,255,255,.3), transparent),
-      radial-gradient(1px 1px at 88% 78%, rgba(255,255,255,.2), transparent),
-      radial-gradient(1px 1px at 25% 88%, rgba(255,255,255,.25), transparent),
-      radial-gradient(1px 1px at 65% 40%, rgba(255,255,255,.18), transparent);
-    background-size:100% 100%;
-    opacity:.5;
-  }
+        /* Navbar */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 50px;
+            background: rgba(0, 0, 26, 0.85);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+        }
 
-  /* ---------- Header ---------- */
-  header{
-    position:fixed; top:0; left:0; right:0; z-index:50;
-    display:flex; align-items:center; justify-content:space-between;
-    padding:18px 28px;
-    background:linear-gradient(to bottom, rgba(10,12,18,.92), rgba(10,12,18,0));
-    backdrop-filter:blur(6px);
-  }
-  .brand{
-    font-family:var(--display); font-weight:600; font-size:15px;
-    letter-spacing:.02em;
-    display:flex; align-items:center; gap:8px;
-  }
-  .brand .dot{width:7px; height:7px; border-radius:50%; background:var(--amber); box-shadow:0 0 10px var(--amber);}
-  .top-links{display:flex; gap:26px; font-size:13.5px; color:var(--text-muted);}
-  .top-links a{transition:color .2s;}
-  .top-links a:hover{color:var(--amber);}
-  .menu-btn{
-    display:none; background:none; border:1px solid var(--line-strong); color:var(--text);
-    width:38px; height:38px; border-radius:8px; font-size:16px; cursor:pointer;
-  }
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
 
-  /* ---------- Energy-level side nav (signature element) ---------- */
-  .level-nav{
-    position:fixed; right:26px; top:50%; transform:translateY(-50%);
-    z-index:40; display:flex; flex-direction:column-reverse; align-items:flex-end;
-    height:340px; justify-content:space-between;
-  }
-  .level-row{display:flex; align-items:center; gap:10px; cursor:pointer; position:relative;}
-  .level-line{
-    width:34px; height:1px; background:var(--line-strong);
-    transition:width .25s ease, background .25s ease;
-  }
-  .level-label{
-    font-family:var(--mono); font-size:10.5px; color:var(--text-faint);
-    letter-spacing:.03em; opacity:0; transform:translateX(6px);
-    transition:opacity .25s ease, transform .25s ease, color .25s ease;
-    white-space:nowrap;
-  }
-  .level-row:hover .level-label,
-  .level-row.active .level-label{opacity:1; transform:translateX(0);}
-  .level-row.active .level-line{width:52px; background:var(--amber); box-shadow:0 0 8px var(--amber);}
-  .level-row.active .level-label{color:var(--amber);}
-  .electron{
-    position:absolute; right:-3px; width:7px; height:7px; border-radius:50%;
-    background:var(--amber); box-shadow:0 0 10px 2px var(--amber);
-    transition:top .5s cubic-bezier(.3,.7,.2,1);
-    top:0;
-  }
+        .logo-icon {
+            width: 35px;
+            height: 35px;
+            background: white;
+            border-radius: 50% 20% 50% 20%;
+        }
 
-  @media (max-width:980px){
-    .level-nav{display:none;}
-    .top-links{display:none;}
-    .menu-btn{display:block;}
-  }
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
 
-  /* mobile progress dots */
-  .mobile-progress{
-    display:none; position:fixed; top:64px; left:0; right:0; z-index:45;
-    justify-content:center; gap:7px; padding:6px 0;
-  }
-  .mobile-progress span{width:5px; height:5px; border-radius:50%; background:var(--line-strong); transition:background .2s, transform .2s;}
-  .mobile-progress span.active{background:var(--amber); transform:scale(1.6);}
-  @media (max-width:980px){ .mobile-progress{display:flex;} }
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
+        }
 
-  .mobile-menu{
-    position:fixed; inset:0; z-index:60; background:var(--bg-elevated);
-    display:flex; flex-direction:column; padding:90px 32px;
-    transform:translateY(-100%); transition:transform .35s ease;
-  }
-  .mobile-menu.open{transform:translateY(0);}
-  .mobile-menu a{font-family:var(--display); font-size:26px; padding:14px 0; border-bottom:1px solid var(--line); color:var(--text);}
-  .mobile-close{position:absolute; top:22px; right:24px; background:none; border:none; color:var(--text); font-size:22px; cursor:pointer;}
+        .nav-links a:hover {
+            color: var(--accent-cyan);
+        }
 
-  /* ---------- Hero ---------- */
-  .hero{
-    min-height:100svh; display:flex; flex-direction:column; justify-content:center;
-    padding-top:100px; padding-bottom:60px;
-  }
-  .eyebrow{
-    font-family:var(--mono); font-size:12.5px; color:var(--cyan);
-    letter-spacing:.12em; text-transform:uppercase; margin-bottom:22px;
-    display:flex; align-items:center; gap:10px;
-  }
-  .eyebrow::before{content:''; width:22px; height:1px; background:var(--cyan);}
-  h1{
-    font-family:var(--display); font-weight:700;
-    font-size:clamp(40px, 8vw, 82px); line-height:1.03; letter-spacing:-.01em;
-    max-width:900px;
-  }
-  h1 .accent{color:var(--amber);}
-  .hero-sub{
-    margin-top:26px; max-width:560px; font-size:17.5px; color:var(--text-muted);
-    line-height:1.7;
-  }
-  .hero-cta{display:flex; gap:16px; margin-top:38px; flex-wrap:wrap;}
-  .btn{
-    font-family:var(--body); font-weight:600; font-size:14.5px;
-    padding:13px 24px; border-radius:8px; transition:all .2s ease;
-    display:inline-flex; align-items:center; gap:8px;
-  }
-  .btn-primary{background:var(--amber); color:#1a1206;}
-  .btn-primary:hover{background:#ffbb52; transform:translateY(-1px);}
-  .btn-ghost{border:1px solid var(--line-strong); color:var(--text);}
-  .btn-ghost:hover{border-color:var(--amber); color:var(--amber);}
+        .local-time {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
 
-  /* emission-spectrum accent strip (CdSe quantum-dot size-tunable colour) */
-  .spectrum{
-    margin-top:56px; display:flex; height:5px; width:min(100%, 520px);
-    border-radius:3px; overflow:hidden; opacity:.85;
-  }
-  .spectrum span{flex:1; height:100%;}
+        /* Main Container */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 160px 20px 100px 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 120px;
+        }
 
-  /* ---------- Section shared ---------- */
-  .section{padding:130px 0 90px;}
-  .section-head{margin-bottom:56px; max-width:640px;}
-  .kicker{
-    font-family:var(--mono); font-size:12px; color:var(--text-faint);
-    letter-spacing:.1em; text-transform:uppercase; margin-bottom:14px;
-    display:flex; align-items:center; gap:10px;
-  }
-  .kicker .n{color:var(--amber);}
-  h2{font-family:var(--display); font-weight:600; font-size:clamp(28px,4vw,40px); letter-spacing:-.01em;}
-  .lede{margin-top:16px; color:var(--text-muted); font-size:16.5px; line-height:1.75;}
+        /* Scroll Sections Animation Base */
+        .reveal-section {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+            text-align: center;
+        }
 
-  .reveal{opacity:0; transform:translateY(22px); transition:opacity .7s ease, transform .7s ease;}
-  .reveal.visible{opacity:1; transform:translateY(0);}
+        .reveal-section.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
 
-  .subhead{
-    font-family:var(--mono); font-size:11.5px; letter-spacing:.09em; text-transform:uppercase;
-    color:var(--text-faint); margin:52px 0 20px;
-  }
+        /* Hero Header */
+        .hero h1 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            letter-spacing: -0.5px;
+        }
 
-  /* status badges */
-  .badge{
-    font-family:var(--mono); font-size:10.5px; letter-spacing:.03em;
-    padding:4px 9px; border-radius:20px; display:inline-block;
-  }
-  .badge-submitted{background:var(--cyan-dim); color:var(--cyan);}
-  .badge-progress{background:var(--amber-dim); color:var(--amber);}
-  .badge-prep{background:rgba(224,99,122,.14); color:var(--rose);}
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+        }
 
-  /* research cards */
-  .paper{
-    border:1px solid var(--line); border-radius:14px; padding:26px 28px;
-    margin-bottom:16px; background:var(--bg-card);
-    transition:border-color .25s ease, transform .25s ease;
-  }
-  .paper:hover{border-color:var(--line-strong); transform:translateY(-2px);}
-  .paper-top{display:flex; justify-content:space-between; align-items:flex-start; gap:16px; flex-wrap:wrap;}
-  .paper h3{font-family:var(--display); font-weight:600; font-size:18.5px; max-width:600px;}
-  .paper-meta{font-size:13.5px; color:var(--text-faint); margin-top:6px;}
-  .paper p{margin-top:14px; color:var(--text-muted); font-size:14.5px; line-height:1.7;}
-  .paper-links{margin-top:16px; display:flex; gap:18px; flex-wrap:wrap;}
-  .paper-links a{font-family:var(--mono); font-size:12.5px; color:var(--cyan); border-bottom:1px solid transparent;}
-  .paper-links a:hover{border-color:var(--cyan);}
+        /* Philosophy Text Blocks */
+        .philosophy-block h2 {
+            font-size: 2.2rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
 
-  /* project / cert grid */
-  .grid{display:grid; grid-template-columns:repeat(2, 1fr); gap:18px;}
-  @media (max-width:720px){.grid{grid-template-columns:1fr;}}
-  .card{
-    border:1px solid var(--line); border-radius:14px; padding:24px;
-    background:var(--bg-card); transition:border-color .25s ease, transform .25s ease;
-  }
-  .card:hover{border-color:var(--line-strong); transform:translateY(-2px);}
-  .card .tag{font-family:var(--mono); font-size:10.5px; color:var(--text-faint); text-transform:uppercase; letter-spacing:.06em;}
-  .card h4{font-family:var(--display); font-weight:600; font-size:16.5px; margin-top:10px;}
-  .card p{margin-top:10px; font-size:14px; color:var(--text-muted); line-height:1.65;}
-  .card a.link{display:inline-block; margin-top:14px; font-family:var(--mono); font-size:12px; color:var(--cyan);}
+        .philosophy-block p {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
 
-  .cert-list{border-top:1px solid var(--line);}
-  .cert-row{
-    display:flex; justify-content:space-between; align-items:baseline; gap:16px;
-    padding:16px 0; border-bottom:1px solid var(--line); flex-wrap:wrap;
-  }
-  .cert-row .cname{font-weight:500; font-size:15px;}
-  .cert-row .cissuer{font-family:var(--mono); font-size:12px; color:var(--text-faint);}
+        /* Core Essence Card */
+        .core-card {
+            background: linear-gradient(135deg, #0d233a 0%, #081628 100%);
+            border: 1px solid rgba(0, 242, 254, 0.2);
+            border-radius: 24px;
+            padding: 50px;
+            text-align: left;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        }
 
-  .coming-soon{
-    border:1px dashed var(--line-strong); border-radius:14px; padding:22px 24px;
-    color:var(--text-faint); font-size:14px; font-family:var(--mono);
-    display:flex; align-items:center; gap:12px;
-  }
-  .coming-soon .pulse{width:7px; height:7px; border-radius:50%; background:var(--amber); animation:pulse 1.8s infinite;}
-  @keyframes pulse{0%,100%{opacity:1;} 50%{opacity:.25;}}
+        .core-card h3 {
+            font-size: 1.6rem;
+            margin-bottom: 20px;
+            color: var(--accent-cyan);
+        }
 
-  /* about / connect strip */
-  .about-strip{padding:90px 0; border-top:1px solid var(--line); border-bottom:1px solid var(--line);}
-  .about-strip p{max-width:760px; font-size:19px; line-height:1.75; color:var(--text);}
-  .about-strip .em{color:var(--amber); font-style:normal;}
+        .core-card p {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+            line-height: 1.7;
+        }
 
-  /* contact */
-  .contact-grid{display:flex; flex-wrap:wrap; gap:14px; margin-top:36px;}
-  .contact-item{
-    flex:1 1 220px; border:1px solid var(--line); border-radius:14px; padding:22px;
-    background:var(--bg-card); transition:border-color .2s;
-  }
-  .contact-item:hover{border-color:var(--amber);}
-  .contact-item .tag{font-family:var(--mono); font-size:10.5px; color:var(--text-faint); text-transform:uppercase;}
-  .contact-item .val{font-family:var(--display); font-size:16px; margin-top:8px; word-break:break-word;}
+        /* Action Buttons */
+        .cta-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            align-items: center;
+        }
 
-  footer{padding:50px 0 70px; color:var(--text-faint); font-size:13px; display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px;}
-  footer a{color:var(--text-faint);}
-  footer a:hover{color:var(--amber);}
+        .cta-btn {
+            width: 100%;
+            max-width: 500px;
+            padding: 18px 30px;
+            background: linear-gradient(135deg, #0072ff 0%, #00c6ff 100%);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            text-decoration: none;
+            box-shadow: 0 10px 25px rgba(0, 114, 255, 0.3);
+            transition: all 0.3s ease;
+        }
 
-  @media (prefers-reduced-motion: reduce){
-    *{animation-duration:.001ms !important; transition-duration:.001ms !important; scroll-behavior:auto !important;}
-  }
-</style>
+        .cta-btn span {
+            transition: transform 0.3s ease;
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(0, 242, 254, 0.4);
+            background: linear-gradient(135deg, #00c6ff 0%, #0072ff 100%);
+        }
+
+        .cta-btn:hover span {
+            transform: translateX(8px);
+        }
+    </style>
 </head>
 <body>
 
-<div class="noise-field"></div>
+    <!-- Navigation Bar -->
+    <nav>
+        <div class="logo-area">
+            <div class="logo-icon"></div>
+        </div>
+        <div class="local-time" id="local-time">Local 00:00:00 AM</div>
+        <ul class="nav-links">
+            <li><a href="#about">About me</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#skills">Skills</a></li>
+        </ul>
+    </nav>
 
-<header>
-  <div class="brand"><span class="dot"></span>T. Zeyad Jawad</div>
-  <nav class="top-links">
-    <a href="#physics">Physics</a>
-    <a href="#data">Data Analysis</a>
-    <a href="#databases">Databases</a>
-    <a href="#automation">IT &amp; Automation</a>
-    <a href="#ml">ML &amp; AI</a>
-    <a href="#contact">Contact</a>
-  </nav>
-  <button class="menu-btn" id="menuBtn" aria-label="Open menu">☰</button>
-</header>
+    <!-- Main Content Container -->
+    <div class="container">
 
-<div class="mobile-progress" id="mobileProgress">
-  <span data-target="hero"></span><span data-target="physics"></span><span data-target="data"></span>
-  <span data-target="databases"></span><span data-target="automation"></span><span data-target="ml"></span><span data-target="contact"></span>
-</div>
+        <!-- Hero Section -->
+        <section class="hero reveal-section">
+            <h1>Tariq Zeyad Jawad</h1>
+            <p>&gt; Data Analyst &nbsp;&nbsp; &gt; Data Engineer</p>
+        </section>
 
-<div class="mobile-menu" id="mobileMenu">
-  <button class="mobile-close" id="mobileClose" aria-label="Close menu">✕</button>
-  <a href="#physics">Physics</a>
-  <a href="#data">Data Analysis</a>
-  <a href="#databases">Databases</a>
-  <a href="#automation">IT &amp; Automation</a>
-  <a href="#ml">ML &amp; AI</a>
-  <a href="#contact">Contact</a>
-</div>
+        <!-- Section 1 -->
+        <section class="philosophy-block reveal-section">
+            <h2>Do you have a problem you are facing?</h2>
+            <p>Do you know how to solve it?</p>
+        </section>
 
-<!-- Energy-level signature nav: spacing mimics hydrogen-atom level spacing (E ∝ -1/n²) -->
-<nav class="level-nav" id="levelNav" aria-label="Section energy levels">
-  <div class="level-row" data-target="physics" data-n="1" style="order:5;">
-    <span class="level-line"></span><span class="level-label">n=1 · Physics</span><span class="electron" id="electronDot"></span>
-  </div>
-  <div class="level-row" data-target="data" data-n="2" style="order:4;">
-    <span class="level-line"></span><span class="level-label">n=2 · Data Analysis</span>
-  </div>
-  <div class="level-row" data-target="databases" data-n="3" style="order:3;">
-    <span class="level-line"></span><span class="level-label">n=3 · Databases</span>
-  </div>
-  <div class="level-row" data-target="automation" data-n="4" style="order:2;">
-    <span class="level-line"></span><span class="level-label">n=4 · IT &amp; Automation</span>
-  </div>
-  <div class="level-row" data-target="ml" data-n="5" style="order:1;">
-    <span class="level-line"></span><span class="level-label">n=5 · ML &amp; AI</span>
-  </div>
-</nav>
+        <!-- Section 2 -->
+        <section class="philosophy-block reveal-section">
+            <h2>PLAN in a coherent way to see the whole picture.</h2>
+            <p style="font-size: 1.5rem; color: #fff; margin-top: 10px;">THEN WHAT?</p>
+            <p style="margin-top: 10px; font-style: italic;">act...</p>
+            <p style="margin-top: 15px; color: var(--accent-cyan); font-weight: 500;">That's it, Vili — EVERYTHING starts with planning.</p>
+        </section>
 
-<main>
+        <!-- Core Essence Card -->
+        <section class="core-card reveal-section">
+            <h3>The Core Essence</h3>
+            <p>My journey stems from a deep foundation in advanced computational sciences and physics. I view data and automated pipelines not just as numbers, but as structured physical systems that can be modeled, optimized, and converted into clear commercial direction.</p>
+        </section>
 
-  <!-- HERO -->
-  <section class="hero wrap" id="hero">
-    <div class="eyebrow">Physics → Data &amp; AI</div>
-    <h1>Charging up from <span class="accent">quantum physics</span> to applied data science.</h1>
-    <p class="hero-sub">
-      I'm a physics researcher working on quantum batteries and quantum thermodynamics at the
-      University of Kufa. In parallel, I'm building real, verifiable skill in data analysis,
-      databases, automation, and machine learning — the same discipline of modelling, measuring,
-      and simplifying, pointed at a new class of problems.
-    </p>
-    <div class="hero-cta">
-      <a href="#physics" class="btn btn-primary">See the research</a>
-      <a href="#contact" class="btn btn-ghost">Get in touch</a>
-    </div>
-    <div class="spectrum" aria-hidden="true">
-      <span style="background:#3b6bd6"></span><span style="background:#3fa7e8"></span>
-      <span style="background:#49c7c2"></span><span style="background:#7fd67a"></span>
-      <span style="background:#f2d43b"></span><span style="background:#f2a93b"></span>
-      <span style="background:#e0637a"></span>
-    </div>
-  </section>
+        <!-- Action / CTA Section -->
+        <section class="reveal-section">
+            <h2 style="margin-bottom: 30px; font-size: 1.8rem;">Do you want to know more?</h2>
+            <div class="cta-container">
+                <a href="#projects" class="cta-btn">
+                    Explore my projects <span>→</span>
+                </a>
+                <a href="#skills" class="cta-btn">
+                    View skills & Certificates <span>→</span>
+                </a>
+                <a href="#contact" class="cta-btn">
+                    About me & Contact <span>→</span>
+                </a>
+            </div>
+        </section>
 
-  <!-- ABOUT STRIP -->
-  <section class="about-strip">
-    <div class="wrap reveal">
-      <p>
-        My core research is in <span class="em">quantum information and quantum thermodynamics</span> —
-        specifically, how open quantum systems store and lose extractable energy when coupled to
-        noisy environments. Outside the lab, I'm applying that same instinct — find the signal,
-        question the noise, verify the model — to data. Each section below is an honest snapshot:
-        finished coursework and shipped projects sit next to what's openly still in progress.
-      </p>
-    </div>
-  </section>
-
-  <!-- PHYSICS -->
-  <section class="section wrap" id="physics">
-    <div class="section-head reveal">
-      <div class="kicker"><span class="n">n=1</span> · Ground State</div>
-      <h2>Physics</h2>
-      <p class="lede">
-        Quantum information and quantum thermodynamics, with a focus on quantum batteries:
-        systems that store extractable work (ergotropy) and lose it to environmental noise.
-        My work asks how much of that loss can be passively prevented, and what it costs to try.
-      </p>
     </div>
 
-    <div class="reveal">
-      <p style="color:var(--text-muted); font-size:14.5px; margin-bottom:28px;">
-        <strong style="color:var(--text);">B.Sc. Physics</strong> — University of Kufa, Najaf, Iraq (Nov 2022 – Jun 2026) ·
-        Second Prize, Pure Sciences, 16th Students Projects Conference, University of Kufa (2026)
-      </p>
-    </div>
+    <script>
+        // Live Clock Script
+        function updateTime() {
+            const now = new Date();
+            let hours = now.getHours();
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+            const ampm = hours >= 12 ? 'PM' : 'AM';
+            hours = hours % 12;
+            hours = hours ? hours : 12;
+            const timeString = `Local ${String(hours).padStart(2, '0')}:${minutes}:${seconds} ${ampm}`;
+            document.getElementById('local-time').textContent = timeString;
+        }
+        setInterval(updateTime, 1000);
+        updateTime();
 
-    <div class="subhead reveal">Research &amp; Publications</div>
+        // Scroll Reveal Animation (Fade In / Out effect on scrolling)
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.15
+        };
 
-    <div class="paper reveal">
-      <div class="paper-top">
-        <h3>Ergotropy Protection via Cavity Detuning in Collective Open Quantum Batteries</h3>
-        <span class="badge badge-submitted">Submitted — EPJ D, 2026</span>
-      </div>
-      <div class="paper-meta">Sole author</div>
-      <p>
-        Derives a closed-form scaling law, Δ*(N) ∝ √N, for passively protecting an N-qubit
-        quantum battery from superradiant decay by detuning an intermediate cavity — no external
-        driving energy required. Verified with full QuTiP simulation of the collective open-system
-        dynamics.
-      </p>
-      <div class="paper-links">
-        <a href="https://arxiv.org/abs/2605.04042" target="_blank" rel="noopener">arXiv:2605.04042 ↗</a>
-        <a href="https://github.com/TariqZJawad/Quantum-Research-Codes/blob/main/code.py" target="_blank" rel="noopener">Simulation code ↗</a>
-      </div>
-    </div>
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                } else {
+                    // إذا أردت أن تختفي النصوص عند التمرير للأعلى والأسفل مرة أخرى
+                    entry.target.classList.remove('active');
+                }
+            });
+        }, observerOptions);
 
-    <div class="paper reveal">
-      <div class="paper-top">
-        <h3>Impact of Vacuum Fluctuations on the Properties and Stability of CdSe Quantum Dot Assemblies</h3>
-        <span class="badge badge-submitted">Submitted — Indian Journal of Physics, 2026</span>
-      </div>
-      <div class="paper-meta">Co-authored with F. A. Al-Temimie &amp; A. A. Jabbar</div>
-      <p>
-        Combines DFT electronic-structure calculations (GPAW) with Lifshitz theory to quantify
-        Casimir–Lifshitz forces and quantum-tunneling energy splitting in nanoscale CdSe quantum
-        dot clusters — and shows vacuum forces alone can't drive their self-assembly.
-      </p>
-    </div>
-
-    <div class="paper reveal">
-      <div class="paper-top">
-        <h3>Cavity-Magnon-Phonon Quantum Battery Beyond the Rotating-Wave Approximation</h3>
-        <span class="badge badge-prep">In preparation</span>
-      </div>
-      <div class="paper-meta">International collaboration — India &amp; China</div>
-      <p>
-        Studies Liouvillian exceptional points and non-Markovian ergotropy dynamics in a
-        cavity-magnon-phonon platform, extending the detuning-protection idea beyond the
-        rotating-wave regime.
-      </p>
-    </div>
-  </section>
-
-  <!-- DATA ANALYSIS -->
-  <section class="section wrap" id="data">
-    <div class="section-head reveal">
-      <div class="kicker"><span class="n">n=2</span> · First Excitation</div>
-      <h2>Data Analysis</h2>
-      <p class="lede">
-        Physics trains you to find the signal underneath noisy measurements. This is the same
-        instinct, pointed at operational and business data instead of qubits.
-      </p>
-    </div>
-
-    <div class="subhead reveal">Certifications</div>
-    <div class="cert-list reveal">
-      <div class="cert-row"><span class="cname">Google Data Analytics Professional Certificate — incl. Capstone</span><span class="cissuer">Google</span></div>
-      <div class="cert-row"><span class="cname">Excel Basics for Data Analysis</span><span class="cissuer">IBM</span></div>
-      <div class="cert-row"><span class="cname">Foundations: Data, Data, Everywhere</span><span class="cissuer">Google</span></div>
-    </div>
-
-    <div class="subhead reveal">Projects</div>
-    <div class="grid reveal">
-      <div class="card">
-        <span class="tag">Case Study</span>
-        <h4>Global SuperStore — Profit Erosion Analysis</h4>
-        <p>Analyzed 50,000+ retail sales records to explain why profit was falling despite rising
-        sales — isolating a loss-making product category and a regional over-discounting pattern,
-        and turning both into pricing and inventory recommendations.</p>
-      </div>
-      <div class="card">
-        <span class="tag">Reference Guide · 36 pages</span>
-        <h4>Google Sheets Functions Reference</h4>
-        <p>A categorized guide to all 516 built-in Google Sheets functions across 17 functional
-        areas, built while working hands-on with spreadsheet-based analysis.</p>
-        <a class="link" href="https://lnkd.in/d6hdYsMX" target="_blank" rel="noopener">View guide ↗</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- DATABASES -->
-  <section class="section wrap" id="databases">
-    <div class="section-head reveal">
-      <div class="kicker"><span class="n">n=3</span> · Second Excitation</div>
-      <h2>Databases</h2>
-      <p class="lede">
-        Good analysis is only as reliable as the data model underneath it. I wanted to understand
-        that layer directly, rather than treat it as a black box.
-      </p>
-    </div>
-
-    <div class="subhead reveal">Certifications — PostgreSQL for Everybody Specialization, University of Michigan</div>
-    <div class="cert-list reveal">
-      <div class="cert-row"><span class="cname">Database Design and Basic SQL in PostgreSQL</span><span class="cissuer">U. Michigan</span></div>
-      <div class="cert-row"><span class="cname">Intermediate PostgreSQL</span><span class="cissuer">U. Michigan</span></div>
-      <div class="cert-row"><span class="cname">JSON and Natural Language Processing in PostgreSQL</span><span class="cissuer">U. Michigan</span></div>
-    </div>
-
-    <div class="subhead reveal">Projects</div>
-    <div class="grid reveal">
-      <div class="card">
-        <span class="tag">Guide · 4 pages</span>
-        <h4>Database Normalization &amp; Migration Guide</h4>
-        <p>Worked examples of schema normalization and migrating flat CSV data into a properly
-        related PostgreSQL schema — including one-to-many and many-to-many relations.</p>
-      </div>
-      <div class="card">
-        <span class="tag">Guide · 6 pages</span>
-        <h4>Database Indexing &amp; Hashing Strategies</h4>
-        <p>A practical decision framework for B-Tree vs. hash indexing, aimed at resolving the
-        query-performance bottlenecks that show up in large, unindexed backend databases.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- IT & AUTOMATION -->
-  <section class="section wrap" id="automation">
-    <div class="section-head reveal">
-      <div class="kicker"><span class="n">n=4</span> · Third Excitation</div>
-      <h2>IT &amp; Automation</h2>
-      <p class="lede">
-        Research work is full of repetitive setup. Automation is how you get that time back for
-        the actual thinking — this track is next on my list.
-      </p>
-    </div>
-
-    <div class="subhead reveal">In progress</div>
-    <div class="cert-list reveal">
-      <div class="cert-row"><span class="cname">Google IT Automation with Python</span><span class="cissuer">Planned</span></div>
-      <div class="cert-row"><span class="cname">Automation and AI Integration</span><span class="cissuer">Planned</span></div>
-    </div>
-
-    <div class="coming-soon reveal" style="margin-top:28px;">
-      <span class="pulse"></span> Projects and case studies for this track are coming soon.
-    </div>
-  </section>
-
-  <!-- ML & AI -->
-  <section class="section wrap" id="ml">
-    <div class="section-head reveal">
-      <div class="kicker"><span class="n">n=5</span> · Fourth Excitation</div>
-      <h2>Machine Learning &amp; AI</h2>
-      <p class="lede">
-        The physics I do is already a simulation-and-inference discipline. Machine learning is a
-        natural extension of that same toolkit into data-driven prediction.
-      </p>
-    </div>
-
-    <div class="subhead reveal">Certifications</div>
-    <div class="cert-list reveal">
-      <div class="cert-row"><span class="cname">Python for Data Science, AI &amp; Development</span><span class="cissuer">IBM</span></div>
-    </div>
-    <div class="cert-list reveal" style="border-top:none; margin-top:-1px;">
-      <div class="cert-row"><span class="cname">Google Advanced Data Analytics</span><span class="cissuer">Planned</span></div>
-      <div class="cert-row"><span class="cname">Machine Learning</span><span class="cissuer">Planned</span></div>
-    </div>
-
-    <div class="subhead reveal">Projects</div>
-    <div class="grid reveal">
-      <div class="card">
-        <span class="tag">Reference Guide · 21 pages</span>
-        <h4>Python Reference Guide</h4>
-        <p>A practical Python reference built while learning — covering core syntax, Pandas &amp;
-        NumPy data handling, and working with APIs and web scraping.</p>
-      </div>
-    </div>
-    <div class="coming-soon reveal" style="margin-top:18px;">
-      <span class="pulse"></span> ML case studies and models are coming soon as coursework progresses.
-    </div>
-  </section>
-
-  <!-- CONTACT -->
-  <section class="section wrap" id="contact">
-    <div class="section-head reveal">
-      <div class="kicker">Get in touch</div>
-      <h2>Let's talk research, data, or opportunities.</h2>
-      <p class="lede">Open to collaboration on quantum thermodynamics research, and to data / ML
-      opportunities as I continue building this track.</p>
-    </div>
-    <div class="contact-grid reveal">
-      <a class="contact-item" href="mailto:tzyad3763@gmail.com">
-        <div class="tag">Email</div><div class="val">tzyad3763@gmail.com</div>
-      </a>
-      <a class="contact-item" href="https://github.com/TariqZJawad" target="_blank" rel="noopener">
-        <div class="tag">GitHub</div><div class="val">github.com/TariqZJawad</div>
-      </a>
-      <a class="contact-item" href="https://www.linkedin.com/in/tariq-jawad" target="_blank" rel="noopener">
-        <div class="tag">LinkedIn</div><div class="val">linkedin.com/in/tariq-jawad</div>
-      </a>
-      <div class="contact-item">
-        <div class="tag">Based in</div><div class="val">Najaf, Iraq</div>
-      </div>
-    </div>
-  </section>
-
-</main>
-
-<footer class="wrap">
-  <span>© 2026 Tariq Zeyad Jawad.</span>
-  <span>Built by hand, one energy level at a time.</span>
-</footer>
-
-<script>
-  // Mobile menu toggle
-  const menuBtn = document.getElementById('menuBtn');
-  const mobileMenu = document.getElementById('mobileMenu');
-  const mobileClose = document.getElementById('mobileClose');
-  menuBtn.addEventListener('click', () => mobileMenu.classList.add('open'));
-  mobileClose.addEventListener('click', () => mobileMenu.classList.remove('open'));
-  mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mobileMenu.classList.remove('open')));
-
-  // Scroll reveal
-  const revealEls = document.querySelectorAll('.reveal');
-  const revealObserver = new IntersectionObserver((entries) => {
-    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-  }, { threshold: 0.12 });
-  revealEls.forEach(el => revealObserver.observe(el));
-
-  // Energy-level nav + mobile progress: track active section
-  const sections = ['hero','physics','data','databases','automation','ml','contact'];
-  const levelRows = document.querySelectorAll('.level-row');
-  const electron = document.getElementById('electronDot');
-  const mobileDots = document.querySelectorAll('.mobile-progress span');
-
-  levelRows.forEach(row => {
-    row.addEventListener('click', () => {
-      document.getElementById(row.dataset.target).scrollIntoView({ behavior: 'smooth' });
-    });
-  });
-
-  function currentSection() {
-    let current = sections[0];
-    for (const id of sections) {
-      const el = document.getElementById(id);
-      if (!el) continue;
-      const rect = el.getBoundingClientRect();
-      if (rect.top <= window.innerHeight * 0.4) current = id;
-    }
-    return current;
-  }
-
-  function updateNav() {
-    const active = currentSection();
-
-    levelRows.forEach(row => {
-      const isActive = row.dataset.target === active;
-      row.classList.toggle('active', isActive);
-      if (isActive) {
-        const rect = row.getBoundingClientRect();
-        const navRect = document.getElementById('levelNav').getBoundingClientRect();
-        electron.style.top = (rect.top - navRect.top + rect.height / 2 - 3.5) + 'px';
-      }
-    });
-
-    mobileDots.forEach(dot => dot.classList.toggle('active', dot.dataset.target === active));
-  }
-
-  let ticking = false;
-  window.addEventListener('scroll', () => {
-    if (!ticking) {
-      requestAnimationFrame(() => { updateNav(); ticking = false; });
-      ticking = true;
-    }
-  });
-  window.addEventListener('resize', updateNav);
-  window.addEventListener('load', updateNav);
-  updateNav();
-</script>
-
+        document.querySelectorAll('.reveal-section').forEach(section => {
+            observer.observe(section);
+        });
+    </script>
 </body>
 </html>
