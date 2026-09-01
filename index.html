@@ -28,40 +28,44 @@
             color: var(--text-main);
             font-family: 'Inter', sans-serif;
             overflow-x: hidden;
-            padding-top: 140px; /* مسافة لكي لا يختفي المحتوى تحت الـ Navbar الثابت */
+            height: 450vh;
+            padding-top: 140px; /* مساحة آمنة وثابتة لمنع أي تداخل مع الهيدر العلوي */
         }
 
-        /* Navbar الثابت */
-        nav {
+        /* حاوية علوية متصلة بدون أي فراغات */
+        .top-wrapper {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 50px;
-            background: rgba(2, 2, 15, 0.9);
-            backdrop-filter: blur(12px);
             z-index: 1000;
+            background: rgba(2, 2, 15, 0.98);
+            backdrop-filter: blur(12px);
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
 
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 40px;
+        }
+
         .logo-area img {
-            height: 38px;
+            height: 32px;
             width: auto;
         }
 
         .nav-links {
             display: flex;
-            gap: 30px;
+            gap: 25px;
             list-style: none;
         }
 
         .nav-links a {
             color: var(--text-muted);
             text-decoration: none;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             transition: color 0.3s ease;
         }
 
@@ -70,83 +74,104 @@
         }
 
         .local-time {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        /* فريم الاسم متطابق تماماً في المنتصف وبدون فراغات */
+        .fixed-header-identity {
+            text-align: center;
+            padding: 10px 20px 14px 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.04);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .fixed-header-identity h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 2px;
+            letter-spacing: -0.3px;
+        }
+
+        .fixed-header-identity p {
             font-size: 0.85rem;
             color: var(--text-muted);
         }
 
-        /* الاسم والمسمى الوظيفي الثابت في الأعلى */
-        .fixed-header-identity {
+        /* المسرح الثابت في منتصف الشاشة */
+        .stage {
+            position: fixed;
+            top: 62%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 85%;
+            max-width: 700px;
+            height: 180px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             text-align: center;
-            padding: 20px 20px 40px 20px;
-            margin-bottom: 40px;
+            z-index: 800;
+            transition: opacity 0.4s ease;
         }
 
-        .fixed-header-identity h1 {
-            font-size: 2.8rem;
-            font-weight: 700;
-            margin-bottom: 10px;
-            letter-spacing: -0.5px;
+        .text-slide {
+            position: absolute;
+            width: 100%;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
         }
 
-        .fixed-header-identity p {
-            font-size: 1.15rem;
+        .text-slide.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        /* تنسيق النصوص مع السماح بالالتفاف الطبيعي لتجنب قطع النص */
+        .text-slide h2 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            line-height: 1.4;
+            margin: 0 auto;
+        }
+
+        .text-slide p {
+            font-size: 1.4rem;
             color: var(--text-muted);
         }
 
-        /* حاوية النصوص التفاعلية */
-        .container {
-            max-width: 850px;
-            margin: 0 auto;
-            padding: 0 20px 150px 20px;
+        /* الأقسام الثابتة بالأسفل */
+        .static-sections {
+            position: absolute;
+            top: 360vh;
+            left: 0;
+            width: 100%;
             display: flex;
             flex-direction: column;
-            gap: 180px; /* مسافات مدروسة ومتوازنة وليست ضخمة */
+            align-items: center;
+            gap: 60px;
+            padding: 0 20px 100px 20px;
+            z-index: 850;
         }
 
-        /* تأثير الظهور الفردي في المنتصف مع Effects */
-        .scroll-item {
-            text-align: center;
-            opacity: 0;
-            transform: translateY(40px) scale(0.95);
-            filter: blur(8px);
-            transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), 
-                        transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), 
-                        filter 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .scroll-item.active {
-            opacity: 1;
-            transform: translateY(0) scale(1);
-            filter: blur(0);
-        }
-
-        /* تصميم النصوص الفلسفية */
-        .scroll-item h2 {
-            font-size: 2.2rem;
-            font-weight: 600;
-            margin-bottom: 15px;
-            line-height: 1.35;
-        }
-
-        .scroll-item p {
-            font-size: 1.15rem;
-            color: var(--text-muted);
-            line-height: 1.6;
-        }
-
-        /* الكارد الاحترافي */
         .core-card {
             background: linear-gradient(135deg, #0b1329 0%, #060a17 100%);
             border: 1px solid rgba(0, 242, 254, 0.2);
             border-radius: 20px;
-            padding: 45px;
+            padding: 40px;
             text-align: left;
+            width: 100%;
+            max-width: 700px;
             box-shadow: 0 20px 40px rgba(0,0,0,0.5);
         }
 
         .core-card h3 {
-            font-size: 1.7rem;
-            margin-bottom: 18px;
+            font-size: 1.6rem;
+            margin-bottom: 15px;
             color: var(--accent-cyan);
         }
 
@@ -156,24 +181,23 @@
             line-height: 1.7;
         }
 
-        /* أزرار التفاعل مع Hover Effects */
         .cta-container {
             display: flex;
             flex-direction: column;
-            gap: 18px;
+            gap: 15px;
             align-items: center;
             width: 100%;
+            max-width: 450px;
         }
 
         .cta-btn {
             width: 100%;
-            max-width: 480px;
-            padding: 16px 28px;
+            padding: 15px 25px;
             background: linear-gradient(135deg, #0052D4 0%, #4364F7 50%, #6FB1FC 100%);
             color: white;
             border: none;
             border-radius: 50px;
-            font-size: 1.05rem;
+            font-size: 1rem;
             font-weight: 600;
             cursor: pointer;
             display: flex;
@@ -181,7 +205,7 @@
             align-items: center;
             text-decoration: none;
             box-shadow: 0 10px 25px rgba(0, 82, 212, 0.3);
-            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: all 0.35s ease;
         }
 
         .cta-btn span {
@@ -189,9 +213,8 @@
         }
 
         .cta-btn:hover {
-            transform: translateY(-4px) scale(1.02);
+            transform: translateY(-3px) scale(1.02);
             box-shadow: 0 15px 30px rgba(0, 242, 254, 0.4);
-            background: linear-gradient(135deg, #4364F7 0%, #6FB1FC 100%);
         }
 
         .cta-btn:hover span {
@@ -201,74 +224,50 @@
 </head>
 <body>
 
-    <!-- Navigation Bar -->
-    <nav>
-        <div class="logo-area">
-            <img src="logo.svg" alt="Vili Logo">
-        </div>
-        <div class="local-time" id="local-time">Local 00:00:00 AM</div>
-        <ul class="nav-links">
-            <li><a href="#about">About me</a></li>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#skills">Skills</a></li>
-        </ul>
-    </nav>
-
-    <!-- اسمك والمسمى الوظيفي ثابت في الأعلى دائماً -->
-    <header class="fixed-header-identity" id="about">
-        <h1>Tariq Zeyad Jawad</h1>
-        <p>&gt; Data Analyst &nbsp;&nbsp; &gt; Data Engineer</p>
-    </header>
-
-    <!-- حاوية العناصر الفردية للتمرير التفاعلي في منتصف الشاشة -->
-    <div class="container">
-
-        <!-- النص الأول -->
-        <div class="scroll-item">
-            <h2>Do you have a problem you are facing?</h2>
-        </div>
-
-        <!-- النص الثاني -->
-        <div class="scroll-item">
-            <h2>Do you know how to solve it?</h2>
-        </div>
-
-        <!-- النص الثالث -->
-        <div class="scroll-item">
-            <h2>PLAN in a coherent way to see the whole picture.</h2>
-        </div>
-
-        <!-- النص الرابع -->
-        <div class="scroll-item">
-            <h2 style="font-size: 2.5rem; color: #fff;">THEN WHAT?</h2>
-            <p style="font-style: italic; margin-top: 10px; font-size: 1.3rem;">act...</p>
-            <p style="margin-top: 15px; color: var(--accent-cyan); font-weight: 500;">That's it, Vili — EVERYTHING starts with planning.</p>
-        </div>
-
-        <!-- كارد الجوهر -->
-        <div class="scroll-item">
-            <div class="core-card">
-                <h3>The Core Essence</h3>
-                <p>My journey stems from a deep foundation in advanced computational sciences and physics. I view data and automated pipelines not just as numbers, but as structured physical systems that can be modeled, optimized, and converted into clear commercial direction.</p>
+    <!-- حاوية علوية متصلة بدون أي فراغات -->
+    <div class="top-wrapper">
+        <nav>
+            <div class="logo-area">
+                <img src="logo.svg" alt="Vili Logo">
             </div>
+            <div class="local-time" id="local-time">Local 00:00:00 AM</div>
+            <ul class="nav-links">
+                <li><a href="#about">About me</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#skills">Skills</a></li>
+            </ul>
+        </nav>
+        <header class="fixed-header-identity" id="about">
+            <h1>Tariq Zeyad Jawad</h1>
+            <p>&gt; Data Analyst &nbsp;&nbsp; &gt; Data Engineer</p>
+        </header>
+    </div>
+
+    <!-- مسرح النصوص المتحركة بنظام الكتابة -->
+    <div class="stage" id="textStage">
+        <div class="text-slide active"><h2 class="typewriter" data-text="Do you have a problem you are facing?"></h2></div>
+        <div class="text-slide"><h2 class="typewriter" data-text="Do you know how to solve it?"></h2></div>
+        <div class="text-slide"><h2 class="typewriter" data-text="PLAN in a coherent way to see the whole picture."></h2></div>
+        <div class="text-slide"><h2 class="typewriter" data-text="THEN WHAT?" style="color: #fff;"></h2></div>
+        <div class="text-slide"><p class="typewriter" data-text="act..." style="font-style: italic;"></p></div>
+        <div class="text-slide"><h2 class="typewriter" data-text="EVERYTHING starts with planning." style="color: var(--accent-cyan);"></h2></div>
+    </div>
+
+    <!-- الأقسام الثابتة بالأسفل -->
+    <div class="static-sections" id="projects">
+        <div class="core-card">
+            <h3>The Core Essence</h3>
+            <p>My journey stems from a deep foundation in advanced computational sciences and physics. I view data and automated pipelines not just as numbers, but as structured physical systems that can be modeled, optimized, and converted into clear commercial direction.</p>
         </div>
 
-        <!-- أزرار التفاعل -->
-        <div class="scroll-item" id="projects">
-            <h2 style="margin-bottom: 30px; font-size: 1.9rem;">Do you want to know more?</h2>
+        <div style="width: 100%; display: flex; flex-direction: column; align-items: center;">
+            <h2 style="margin-bottom: 25px; font-size: 1.8rem; text-align: center;">Do you want to know more?</h2>
             <div class="cta-container">
-                <a href="#projects" class="cta-btn">
-                    Explore my projects <span>→</span>
-                </a>
-                <a href="#skills" class="cta-btn">
-                    View skills & Certificates <span>→</span>
-                </a>
-                <a href="#contact" class="cta-btn">
-                    About me & Contact <span>→</span>
-                </a>
+                <a href="#projects" class="cta-btn">Explore my projects <span>→</span></a>
+                <a href="#skills" class="cta-btn">View skills & Certificates <span>→</span></a>
+                <a href="#contact" class="cta-btn">About me & Contact <span>→</span></a>
             </div>
         </div>
-
     </div>
 
     <script>
@@ -287,27 +286,54 @@
         setInterval(updateTime, 1000);
         updateTime();
 
-        // نظام ظهور واختفاء كل عنصر بمفرده بدقة عند وصوله لمنتصف الشاشة فقط
-        const observerOptions = {
-            root: null,
-            rootMargin: '-35% 0px -35% 0px', // يضبط منطقة التفعيل في المنتصف تماماً
-            threshold: 0.1
-        };
+        // تأثير الكتابة الحية (Typewriter) بحرفية ودون اقتطاع
+        function typeWriter(element, text, i = 0) {
+            if (i === 0) element.textContent = '';
+            if (i < text.length) {
+                element.textContent += text.charAt(i);
+                setTimeout(() => typeWriter(element, text, i + 1), 35);
+            }
+        }
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('active');
-                } else {
-                    entry.target.classList.remove('active');
-                }
-            });
-        }, observerOptions);
+        // إدارة التمرير والشرائح
+        const slides = document.querySelectorAll('.text-slide');
+        const totalSlides = slides.length;
+        const stage = document.getElementById('textStage');
+        let lastActiveIndex = -1;
 
-        document.querySelectorAll('.scroll-item').forEach(item => {
-            observer.observe(item);
+        window.addEventListener('scroll', () => {
+            const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+            const scrollFraction = window.scrollY / maxScroll;
+
+            if (scrollFraction > 0.65) {
+                stage.style.opacity = '0';
+                stage.style.pointerEvents = 'none';
+            } else {
+                stage.style.opacity = '1';
+                stage.style.pointerEvents = 'auto';
+
+                const adjustedFraction = window.scrollY / (maxScroll * 0.65);
+                let activeIndex = Math.floor(adjustedFraction * totalSlides);
+                if (activeIndex >= totalSlides) activeIndex = totalSlides - 1;
+                if (activeIndex < 0) activeIndex = 0;
+
+                slides.forEach((slide, index) => {
+                    if (index === activeIndex) {
+                        slide.classList.add('active');
+                        if (index !== lastActiveIndex) {
+                            const targetEl = slide.querySelector('.typewriter');
+                            if (targetEl) {
+                                const fullText = targetEl.getAttribute('data-text');
+                                typeWriter(targetEl, fullText);
+                            }
+                            lastActiveIndex = index;
+                        }
+                    } else {
+                        slide.classList.remove('active');
+                    }
+                });
+            }
         });
     </script>
 </body>
 </html>
- 
