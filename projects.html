@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects | Tariq Zeyad Jawad</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-deep: #02020f;
+            --accent-cyan: #00f2fe;
+            --text-main: #ffffff;
+            --text-muted: #94a3b8;
+            --card-bg: #0b1329;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-deep);
+            color: var(--text-main);
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+            padding-top: 100px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Top Fixed Navbar */
+        .top-wrapper {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(2, 2, 15, 0.98);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo-area img {
+            height: 32px;
+            width: auto;
+            display: block;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--accent-cyan);
+        }
+
+        .local-time {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        /* Page Header */
+        .page-header {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 20px;
+            text-align: left;
+            width: 100%;
+        }
+
+        .page-header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 10px;
+        }
+
+        .page-header p {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            max-width: 600px;
+        }
+
+        .scroll-hint {
+            font-size: 0.9rem;
+            color: var(--accent-cyan);
+            font-weight: 500;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-top: 15px;
+            display: inline-block;
+        }
+
+        /* Horizontal Projects Slider Wrapper */
+        .projects-slider-wrapper {
+            width: 100%;
+            padding: 20px 0 60px 0;
+            position: relative;
+        }
+
+        .projects-slider {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            gap: 40px;
+            padding: 0 calc(50vw - 450px); 
+            scroll-behavior: auto; /* إيقاف التمرير البطيء الافتراضي لضمان سلاسة التدوير الدائري */
+            -ms-overflow-style: none;  
+            scrollbar-width: none;  
+        }
+
+        .projects-slider::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* Project Long Card */
+        .project-card {
+            flex: 0 0 90vw; 
+            max-width: 900px; 
+            scroll-snap-align: center;
+            background: linear-gradient(180deg, #0b1329 0%, #060a17 100%);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 24px;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            transition: border-color 0.3s ease;
+        }
+
+        .project-card:hover {
+            border-color: rgba(0, 242, 254, 0.3);
+        }
+
+        .project-header h2 {
+            font-size: 2rem;
+            color: var(--text-main);
+            margin-bottom: 15px;
+        }
+
+        .hashtags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .hashtag {
+            background: rgba(0, 242, 254, 0.1);
+            color: var(--accent-cyan);
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            border: 1px solid rgba(0, 242, 254, 0.2);
+        }
+
+        .project-desc {
+            font-size: 1.05rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        /* Presentation Iframe Container */
+        .presentation-container {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            background: #02020f;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .presentation-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        /* Rotation message for mobile portrait */
+        .rotate-message {
+            display: none;
+        }
+
+        .dummy-presentation {
+            color: var(--text-muted);
+            text-align: center;
+            font-size: 0.9rem;
+            padding: 20px;
+        }
+
+        .project-footer {
+            display: flex;
+            gap: 15px;
+            margin-top: 10px;
+        }
+
+        .project-link-btn {
+            padding: 12px 24px;
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-main);
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .project-link-btn:hover {
+            background: var(--text-main);
+            color: #000;
+        }
+
+        @media (max-width: 950px) {
+            .projects-slider { padding: 0 20px; }
+            .page-header h1 { font-size: 2rem; }
+            .project-card { padding: 25px; flex: 0 0 92vw; }
+            .project-header h2 { font-size: 1.5rem; }
+            nav { padding: 15px 20px; }
+        }
+
+        @media (max-width: 768px) and (orientation: portrait) {
+            .rotate-message {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                position: absolute;
+                top: 0; left: 0; right: 0; bottom: 0;
+                background: rgba(2, 2, 15, 0.95);
+                backdrop-filter: blur(5px);
+                z-index: 10;
+                color: var(--accent-cyan);
+                text-align: center;
+                gap: 15px;
+                padding: 20px;
+            }
+            .rotate-icon svg {
+                width: 50px;
+                height: 50px;
+                fill: var(--accent-cyan);
+                animation: rotate-anim 2s infinite ease-in-out;
+            }
+            .rotate-message span {
+                font-size: 1.1rem;
+                font-weight: 600;
+                line-height: 1.5;
+            }
+        }
+
+        @keyframes rotate-anim {
+            0% { transform: rotate(0deg); }
+            50% { transform: rotate(-90deg); }
+            100% { transform: rotate(-90deg); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Fixed Navbar -->
+    <div class="top-wrapper">
+        <nav>
+            <div class="logo-area">
+                <a href="index.html"><img src="logo.svg" alt="Vili Logo"></a>
+            </div>
+            <div class="local-time" id="local-time">Local 00:00:00 AM</div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About me</a></li>
+                <li><a href="skills.html">Skills</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <!-- Page Header -->
+    <div class="page-header">
+        <h1>Projects & Case Studies</h1>
+        <p>A collection of my recent data analysis, engineering pipelines, and financial optimization cases.</p>
+        <div class="scroll-hint">Infinite Carousel - Swipe Horizontally <span>→</span></div>
+    </div>
+
+    <!-- Horizontal Projects Slider -->
+    <div class="projects-slider-wrapper">
+        <div class="projects-slider" id="projectsSlider">
+
+            <!-- PROJECT CARD 1 -->
+            <div class="project-card" data-id="1">
+                <div class="project-header">
+                    <h2>Global SuperStore - Financial Performance Optimization</h2>
+                    <div class="hashtags">
+                        <span class="hashtag">#DataAnalysis</span>
+                        <span class="hashtag">#ProfitOptimization</span>
+                        <span class="hashtag">#SalesTrends</span>
+                        <span class="hashtag">#LogisticsStrategy</span>
+                    </div>
+                </div>
+                
+                <div class="project-desc">
+                    An in-depth analysis of the Global SuperStore dataset to uncover the underlying causes of profit erosion across product categories. The study isolates loss-making components (like Tables), evaluates the impact of high regional discount rates, and maps seasonal sales trends to provide actionable strategic recommendations.
+                </div>
+
+                <div class="presentation-container">
+                    <iframe src="https://docs.google.com/presentation/d/e/2PACX-1vT4LJ3KJpY-4XI69pL91xlFQCI7EanuU906zdx8J6KBrGGltucdg7LCl5pTzFsIMLBHAAS2EmPQ4aye/pubembed?start=false&loop=false&delayms=3000" frameborder="0" width="960" height="569" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+                    
+                    <div class="rotate-message">
+                        <div class="rotate-icon">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M16.48 2.52c3.27 1.55 5.61 4.72 5.97 8.48h1.5C23.44 4.84 18.29 0 12 0l-.66.03 3.81 3.81 1.33-1.32zm-6.25-.77c-.59-.59-1.54-.59-2.12 0L1.75 8.11c-.59.59-.59 1.54 0 2.12l12.02 12.02c.59.59 1.54.59 2.12 0l6.36-6.36c.59-.59.59-1.54 0-2.12L10.23 1.75zm4.6 19.44L2.81 9.17l6.36-6.36 12.02 12.02-6.36 6.36zM7.52 21.48C4.25 19.94 1.91 16.76 1.55 13H.05C.46 19.16 5.61 24 12 24l.66-.03-3.81-3.81-1.33 1.32z"/>
+                            </svg>
+                        </div>
+                        <span>Please rotate your device<br>for the best viewing experience.</span>
+                    </div>
+                </div>
+
+                <div class="project-footer">
+                    <a href="#" class="project-link-btn">View Code / Repo</a>
+                    <a href="#" class="project-link-btn">Raw Data</a>
+                </div>
+            </div>
+
+            <!-- PROJECT CARD 2 -->
+            <div class="project-card" data-id="2">
+                <div class="project-header">
+                    <h2>Upcoming Project Two</h2>
+                    <div class="hashtags">
+                        <span class="hashtag">#MachineLearning</span>
+                        <span class="hashtag">#Python</span>
+                    </div>
+                </div>
+                
+                <div class="project-desc">
+                    Brief description of the second project goes here. Explain the problem, the tools you used, and your ultimate solution or findings.
+                </div>
+
+                <div class="presentation-container">
+                    <div class="dummy-presentation">
+                        Future Presentation Placeholder
+                    </div>
+                </div>
+
+                <div class="project-footer">
+                    <a href="#" class="project-link-btn">View Code / Repo</a>
+                </div>
+            </div>
+
+            <!-- PROJECT CARD 3 -->
+            <div class="project-card" data-id="3">
+                <div class="project-header">
+                    <h2>Upcoming Project Three</h2>
+                    <div class="hashtags">
+                        <span class="hashtag">#DataEngineering</span>
+                        <span class="hashtag">#SQL</span>
+                    </div>
+                </div>
+                
+                <div class="project-desc">
+                    Brief description of the third project goes here. Highlight the database architecture and query optimization techniques implemented.
+                </div>
+
+                <div class="presentation-container">
+                    <div class="dummy-presentation">
+                        Future Presentation Placeholder
+                    </div>
+                </div>
+
+                <div class="project-footer">
+                    <a href="#" class="project-link-btn">View Code / Repo</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        // Live Clock Script
+        function updateTime() {
+            const now = new Date();
+            let hours = now.getHours();
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+            const ampm = hours >= 12 ? 'PM' : 'AM';
+            hours = hours % 12;
+            hours = hours ? hours : 12;
+            const timeString = `Local ${String(hours).padStart(2, '0')}:${minutes}:${seconds} ${ampm}`;
+            document.getElementById('local-time').textContent = timeString;
+        }
+        setInterval(updateTime, 1000);
+        updateTime();
+
+        // True Infinite Carousel Loop Logic (حلقة دائرية لا نهائية للأحسنة الدوارة)
+        const slider = document.getElementById('projectsSlider');
+        
+        // استنساخ الكارد الأول والأخير لعمل الحلقة الدائرية بسلاسة
+        const cards = Array.from(slider.children);
+        const firstCardClone = cards[0].cloneNode(true);
+        const lastCardClone = cards[cards.length - 1].cloneNode(true);
+
+        slider.appendChild(firstCardClone);
+        slider.insertBefore(lastCardClone, cards[0]);
+
+        const cardWidth = cards[0].offsetWidth + 40; // عرض الكارد مع الـ Gap
+
+        // ضبط موضع البدء عند الكارد الحقيقي الأول
+        slider.scrollLeft = cardWidth;
+
+        slider.addEventListener('scroll', () => {
+            const scrollLeft = slider.scrollLeft;
+            const maxScroll = slider.scrollWidth - slider.clientWidth;
+
+            // إذا وصل للنهاية (بعد الكارد الأول المستنسخ)، يقفز فوراً للبداية الحقيقية بدون ملاحظة
+            if (scrollLeft >= slider.scrollWidth - cardWidth - 10) {
+                slider.scrollLeft = cardWidth;
+            } 
+            // إذا وصل للبداية (قبل الكارد الأخير المستنسخ)، يقفز فوراً للنهاية الحقيقية
+            else if (scrollLeft <= 5) {
+                slider.scrollLeft = slider.scrollWidth - (cardWidth * 2) - 10;
+            }
+        });
+    </script>
+</body>
+</html>
+
